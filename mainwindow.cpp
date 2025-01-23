@@ -1,106 +1,79 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
-#include <QDebug>
-#include <QVBoxLayout>
+#include<QMessageBox>
+#include<QShortcut>
+#include<qtimer.h>
+
+
+
+
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), clientSocket(nullptr),
-    serverIp("192.168.0.3"), serverPort(1234)  // Default to the local IP for testing
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    setupUI();
-    connectToServer();
+    new QShortcut(QKeySequence(Qt::Key_Enter), this, SLOT(on_LoginButton_pressed()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Y), this, SLOT(makecheckerok()));
 
-    connect(ui->sendButton, &QPushButton::clicked, this, &MainWindow::onSendButtonClicked);
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_SignUpButton_clicked()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_H), this, SLOT(help()));
+    ui->setupUi(this);
+    ui->SuggestionList->hide();
+    generateCaptcha();
+
 }
+void MainWindow::generateCaptcha(){
+    time_t t;
+    int n=7;
+    srand((unsigned)time(&t));
+    QString required_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    captcha = "";
+    while(n--)
+        captcha.push_back(required_chars[rand()%62]);
+    ui->Captcha->setText(captcha);
+
+
+
+}
+
+
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void MainWindow::setupUI()
+void MainWindow::on_LoginButton_pressed()
 {
-    QWidget *centralWidget = new QWidget(this);
-    setCentralWidget(centralWidget);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-
-    statusLabel = new QLabel("Disconnected", this);
-    mainLayout->addWidget(statusLabel);
-
-    messageLog = new QTextEdit(this);
-    messageLog->setReadOnly(true);
-    mainLayout->addWidget(messageLog);
-
-    messageEntry = new QLineEdit(this);
-    mainLayout->addWidget(messageEntry);
-
-    sendButton = new QPushButton("Send", this);
-    mainLayout->addWidget(sendButton);
-
-    connectButton = new QPushButton("Connect", this);
-    mainLayout->addWidget(connectButton);
-
-    serverIpInput = new QLineEdit(this); // Text input for server IP
-    serverIpInput->setPlaceholderText("Enter server IP (Public or Local)");
-    mainLayout->addWidget(serverIpInput);
-
-    connect(connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
-    connect(sendButton, &QPushButton::clicked, this, &MainWindow::onSendButtonClicked);
-
-    centralWidget->setLayout(mainLayout);
-}
-
-void MainWindow::connectToServer()
-{
-    clientSocket = new QTcpSocket(this);
-
-    connect(clientSocket, &QTcpSocket::connected, [this]() {
-        statusLabel->setText("Connected to Server");
-        messageLog->append("Connected to Server...");
-    });
-
-    connect(clientSocket, &QTcpSocket::readyRead, this, &MainWindow::onReadyRead);
-    connect(clientSocket, &QTcpSocket::disconnected, this, &MainWindow::onDisconnected);
-
-    clientSocket->connectToHost(QHostAddress(serverIp), serverPort);
-}
-
-void MainWindow::onConnectButtonClicked()
-{
-    QString serverIp = "192.168.0.4";
-    if (serverIp.isEmpty()) {
-        statusLabel->setText("Server IP is required");
-        return;
+    if(captcha!=ui->Recaptcha->text()){
+        ui->Recaptcha->setStyleSheet("background-color:rgba(0,0,0,0);"
+                                     "border:none;"
+                                     "border-bottom: 2px solid rgba(255,0,0,200);"
+                                     "color:rgba(0,0,0,240);"
+                                     "padding-bottom:7px;");
+        ui->Recaptcha->setText("");
     }
+    else if(ui->passwordinput->text()=="1234"&&ui->usernameinput->text()=="admin"){
 
-    if (clientSocket->state() != QTcpSocket::ConnectedState) {
-        clientSocket->connectToHost(QHostAddress(serverIp), serverPort);
-    } else {
-        statusLabel->setText("Already connected");
     }
-}
+    else if(ui->passwordinput->text()==""&&ui->usernameinput->text()==""){}
+    else{
+        ui->passwordinput->setStyleSheet("background-color:rgba(0,0,0,0);"
+                                     "border:none;"
+                                     "border-bottom: 2px solid rgba(255,0,0,200);"
+                                     "color:rgba(0,0,0,240);"
+                                     "padding-bottom:7px;");
+        ui->usernameinput->setStyleSheet("background-color:rgba(0,0,0,0);"
+                                         "border:none;"
+                                         "border-bottom: 2px solid rgba(255,0,0,200);"
+                                         "color:rgba(0,0,0,240);"
+                                         "padding-bottom:7px;");
 
-void MainWindow::onSendButtonClicked()
-{
-    QString message = messageEntry->text();
-    if (!message.isEmpty() && clientSocket->state() == QTcpSocket::ConnectedState) {
-        clientSocket->write(message.toUtf8());
-        messageLog->append("You: " + message);
-        messageEntry->clear();
+        ui->Recaptcha->setText("");
+
     }
+    generateCaptcha();
+    ui->Recaptcha->setText("");
 }
 
-void MainWindow::onReadyRead()
-{
-    QByteArray data = clientSocket->readAll();
-    messageLog->append("Server: " + QString::fromUtf8(data));
-}
-
-void MainWindow::onDisconnected()
-{
-    statusLabel->setText("Disconnected from Server");
-    messageLog->append("Disconnected from Server");
-}
