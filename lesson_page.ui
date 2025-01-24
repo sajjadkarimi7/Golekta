@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>lesson_page</class>
+ <widget class="QMainWindow" name="lesson_page">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>459</width>
+    <height>429</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>صفحه درس</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #F5DEB3; /* کرم کمی تیره‌تر */
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>                                      اسم درس </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QListWidget" name="listWidget">
+      <property name="styleSheet">
+       <string notr="true">QListWidget {
+    background-color: white; /* پس‌زمینه سفید */
+}
+</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>ارائه محتوای آموزشی</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>لیست دانشجویان درس</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>ثبت نمره</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>برگزاری آزمون</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>صفحه قبل</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #90EE90;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #32CD32;
+    border: 2px solid #006400;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>تکالیف</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>459</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
